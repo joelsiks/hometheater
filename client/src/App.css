@@ -1,0 +1,100 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+html, body {
+	font-family: 'Archivo', sans-serif;
+	background-color: #2c3138;
+	font-size: 16px;
+}
+
+.App {
+	z-index: 10;
+	display: block;
+	max-width: 55rem;
+	padding: 1rem;
+	margin: 1rem auto;
+	color: white;
+}
+
+@media screen and (max-width: 410px) {
+	.App {
+		max-width: 100%;
+		padding: 0;
+		padding-top: 1rem;
+	}
+}
+
+.indexTable {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	opacity: 0.95;
+	border-collapse: collapse;
+}
+
+th:first-child, td:first-child {
+	width: 4em;
+}
+
+th, td {
+	text-align: left;
+	padding: 11px 11px 11px 6px;
+	border-bottom: 1px solid #d1e1e8;
+	color: white;
+}
+
+tr:hover {
+	background-color: #EE4E7E;
+	border-bottom: none;
+	cursor: pointer;
+}
+
+.button {
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  background: #ddd;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.plyr {
+	position: absolute !important;
+	min-width: 100% !important;
+	min-height: 100% !important;
+	height: 100%;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+}
+
+.plyr__caption {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 2.8vw !important;
+	font-weight: 700;
+	font-size: 60px !important;
+}
+
+.movieBanner {
+	width: 80%;
+}
+
+.movieBanner:hover {
+	cursor: pointer;
+}
+
+.inputFilter {
+	border: 0px;
+	border-bottom: 1px solid #ccc;
+	font-size: 16px;
+	font-family: 'Archivo', sans-serif;
+	color: white;
+	background: rgba(0,0,0,0);
+	border-radius: 4px;
+	padding: 10px 0 10px 10px;
+	width: 99%;
+	height: 1.4rem;
+}
