@@ -1,4 +1,6 @@
 
+![movie night](https://raw.githubusercontent.com/joelsiks/hometheater/main/client/src/movie-night.png)
+
 # Hometheater
 
 A simple client/server combination for serving a folder with media on a website.
