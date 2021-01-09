@@ -119,6 +119,7 @@ class Watch extends React.Component {
 			<div>
 				<video id="plyr-player" autoPlay controls>
 					<source src={this.state.video_src.src}  type={this.state.video_src.type} />
+					<track src={this.state.video_src.caption} kind="subtitles" srclang="en" label="English" />
 				</video>
 			</div>
 		);
