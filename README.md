@@ -67,5 +67,6 @@ The format/encoding of the media file is dependent on what your choice of browse
 Too see what media formats/encodings are supported for your browser, check [this](https://en.wikipedia.org/wiki/HTML5_video#Browser_support) wikipedia article.
 
 ## Subtitles
+
 Any subtitles must be placed in `[media_directory]/subtitles`. Any given file can only have one matching `.vtt` file in the subtitles folder.
 This implies that you cannot have two files named the same in two different folders with both having a subtitle file.
