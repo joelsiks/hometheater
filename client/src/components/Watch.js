@@ -13,12 +13,11 @@ class Watch extends React.Component {
 		let subtitle_name = "";
 
 		const paths = window.location.pathname.split("/").splice(2);
+		const folder = decodeURI(paths[0]);
 
 		if(paths.length < 2) {
 			this.props.history.push("/index/" + paths[0]);
 		} else {
-
-			const folder = paths[0];
 			const media = paths[1];
 
 			video_url = folder + "/" + media;
@@ -59,6 +58,8 @@ class Watch extends React.Component {
 			video_options: video_options,
 		}
 
+		// Update the title in case the client was not redirected from an index page.
+		this.props.updateDocumentTitle(folder);
 	}
 
 	subtitleExists(subtitle_file) {
