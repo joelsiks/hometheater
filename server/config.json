@@ -1,5 +1,7 @@
 {
-	"port": 4321,
-	"media_path": "/cm/Content/",
-	"subtitle_path": "/cm/Content/subtitles/"
+	"port": 2278,
+	"media_path": "/b/Content/",
+	"movies_folder": "Movies",
+	"shows_folder": "Shows",
+	"subtitle_path": "Subtitles"
 }

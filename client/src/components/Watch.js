@@ -10,24 +10,24 @@ class Watch extends React.Component {
 
 		let video_url = "";
 		let video_name = "";
-		let subtitle_name = "";
+		let subtitle_url = "";
 
 		const paths = window.location.pathname.split("/").splice(2);
 		const folder = decodeURI(paths[0]);
 
 		if(paths.length < 2) {
-			this.props.history.push("/index/" + paths[0]);
+			this.props.history.push("/index/" + paths[1]);
 		} else {
-			const media = paths[1];
+			const media = paths[2];
 
-			video_url = folder + "/" + media;
-			video_name = media;
-			subtitle_name = media.replace('mp4', 'vtt');
+			video_url = folder + "/" + paths[1] + "/" + media;
+            subtitle_url = video_url.replace(".mp4", ".vtt");
+			video_name = paths[1];
 		}
 
 		const video_src = {
 			src: `/_/${video_url}`,
-			caption: `/_/subtitles/${subtitle_name}`,
+			caption: `/_/${subtitle_url}`,
 			type: "video/mp4",
 		}
 
@@ -63,7 +63,7 @@ class Watch extends React.Component {
 	}
 
 	subtitleExists(subtitle_file) {
-		fetch("/_/subtitles/" + subtitle_file)
+		fetch("/_/Subtitles/" + subtitle_file)
 			.then(response => {
 				return response === 200;
 			}).catch(_ => {

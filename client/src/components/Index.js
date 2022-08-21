@@ -87,7 +87,7 @@ class Index extends React.Component {
 	}
 
 	handleTrClick(item) {
-		if(item.type && item.type === "serie") {
+		if(item.type && item.type === "show") {
 			this.props.history.push("/index/" + item.name);
 		} else {
 			this.props.history.push({

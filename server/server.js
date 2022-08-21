@@ -21,49 +21,62 @@ if(config.media_path === undefined || config.subtitle_path === undefined) {
 }
 
 const media_path = config.media_path;
+const movies_folder = config.movies_folder;
+const shows_folder = config.shows_folder;
+
 const subtitle_path = config.subtitle_path;
+
 const static_path = "/_/";
 
 const port = process.env.PORT || config.port || 4321;
 
 let get_media_items = (_, res, next) => {
-    fs.readdir(media_path, (err, media_folders) => {
 
-        if(err) {
-            res.sendStatus(500);
-            return;
+    let items_obj = {
+        items: []
+    };
+
+    let movie_folders = fs.readdirSync(path.join(media_path, movies_folder));
+
+    movie_folders.forEach(folder => {
+        try {
+            let media_content = fs.readdirSync(path.join(media_path, movies_folder, folder));
+
+            items_obj.items.push({
+                "type": "movie",
+                "name": folder,
+                "url": `${movies_folder}/${folder}/${media_content[0]}`,
+            });
+
+        } catch(error) {
+            next(error);
         }
-
-        let items_obj = {
-            items: []
-        };
-
-        media_folders.forEach(folder => {
-            if(folder != "subtitles") {
-                try {
-                    let media_content = fs.readdirSync(path.join(media_path, folder));
-
-                    let has_multiple_files = media_content.length > 1;
-
-                    items_obj.items.push({
-                        "type": (has_multiple_files ? "serie" : "movie"),
-                        "name": folder,
-                        "url": !has_multiple_files ? `${folder}/${media_content[0]}` : "",
-                    });
-                } catch(error) {
-                    next(error);
-                }
-            }
-        });
-
-        res.locals.items = items_obj;
-        next();
     });
+
+    let shows_folders = fs.readdirSync(path.join(media_path, shows_folder));
+
+    shows_folders.forEach(folder => {
+        try {
+            let media_content = fs.readdirSync(path.join(media_path, shows_folder, folder));
+
+            items_obj.items.push({
+                "type": "show",
+                "name": folder,
+                "url": `${shows_folder}/${folder}/${media_content[0]}`,
+            });
+
+        } catch(error) {
+            next(error);
+        }
+    });
+
+    res.locals.items = items_obj;
+    next();
 };
 
 let get_specific_media_item = (req, res, next) => {
     let media_item = req.params.item;
-    fs.readdir(path.join(media_path, media_item), (err, media_content) => {
+    fs.readdir(path.join(media_path, shows_folder, media_item), (err, media_content) => {
 
         if(err) {
             res.sendStatus(400);
@@ -80,9 +93,14 @@ let get_specific_media_item = (req, res, next) => {
         }
 
         media_content.forEach(content => {
+            // Skip subtitle files.
+            if(content.includes(".vtt")) {
+                return;
+            }
+
             item_obj.items.push({
                 "name": content,
-                "url": `${media_item}/${content}`
+                "url": `${shows_folder}/${media_item}/${content}`
             });
         });
 
